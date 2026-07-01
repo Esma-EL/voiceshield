@@ -109,6 +109,21 @@ curl -X POST http://localhost:8000/api/analyze/audio \
   -F "file=@demo_audio/synthetic.wav" -F "text=virement urgent nouvel IBAN"
 ```
 
+### 5. Tests end-to-end (Playwright)
+
+Vérifie le comportement du badge live dans un vrai navigateur (le deepfake fait
+passer le badge au rouge ; l'appel légitime reste vert + assuré). Playwright
+démarre automatiquement le backend et le frontend.
+
+Prérequis (une fois) : le venv backend créé + `pip install -r requirements.txt`,
+puis depuis `frontend/` :
+
+```bash
+npm install
+npx playwright install chromium   # navigateur de test (une fois)
+npm run test:e2e
+```
+
 ---
 
 ## Scénarios inclus

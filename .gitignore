@@ -10,6 +10,14 @@ frontend/.next/
 frontend/out/
 frontend/.env.local
 
+# Playwright e2e artifacts
+frontend/playwright-report/
+frontend/test-results/
+frontend/blob-report/
+
+# TypeScript incremental build cache
+*.tsbuildinfo
+
 # OS / editor
 .DS_Store
 Thumbs.db
