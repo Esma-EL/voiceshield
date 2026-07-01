@@ -1,0 +1,18 @@
+# --- Core (required to run the MVP) ---
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+pydantic==2.10.4
+pydantic-settings==2.7.1
+numpy==2.2.1
+python-multipart==0.0.20
+
+# --- Optional: real voice anti-spoofing model ---
+# Uncomment to enable the ML detector instead of the heuristic fallback.
+# torch==2.5.1
+# transformers==4.47.1
+# librosa==0.10.2.post1
+# soundfile==0.12.1
+
+# --- Optional: real LLM context analysis (Qwen via DashScope/ModelScope) ---
+# Uncomment + set DASHSCOPE_API_KEY to enable the LLM instead of the rule engine.
+# dashscope==1.20.14
