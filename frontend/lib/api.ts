@@ -3,6 +3,12 @@
 export const API_BASE =
   process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
 
+// Optional API key forwarded to the backend when it enforces one. NOTE: a
+// NEXT_PUBLIC_* value is shipped to the browser and is therefore not secret —
+// use it only for demo gating. For real per-tenant secrets, proxy requests
+// through a server-side route that holds the key.
+const API_KEY = process.env.NEXT_PUBLIC_API_KEY ?? "";
+
 export type BadgeState = "verified" | "suspect" | "fraud";
 export type Speaker = "caller" | "agent";
 
@@ -69,7 +75,9 @@ export interface HealthInfo {
 }
 
 async function getJSON<T>(path: string, init?: RequestInit): Promise<T> {
-  const res = await fetch(`${API_BASE}${path}`, init);
+  const headers = new Headers(init?.headers);
+  if (API_KEY) headers.set("X-API-Key", API_KEY);
+  const res = await fetch(`${API_BASE}${path}`, { ...init, headers });
   if (!res.ok) {
     const detail = await res.text().catch(() => "");
     throw new Error(`${res.status} ${res.statusText} — ${detail}`);

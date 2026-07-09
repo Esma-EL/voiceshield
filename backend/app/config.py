@@ -14,6 +14,18 @@ class Settings(BaseSettings):
     # CORS: the Next.js dev server.
     frontend_origin: str = "http://localhost:3000"
 
+    # --- API access control (optional) ---
+    # If set, every /api/* request must carry `X-API-Key: <api_key>`. Leave
+    # empty for the open demo mode.
+    api_key: str = ""
+
+    # --- Abuse protection ---
+    # Max accepted size for an uploaded audio file (bytes). Guards against
+    # memory-exhaustion DoS and oversized inputs to the native audio decoder.
+    max_upload_bytes: int = 10 * 1024 * 1024  # 10 MiB
+    # Sliding-window per-client request cap (requests / 60s). 0 disables it.
+    rate_limit_per_minute: int = 60
+
     # --- Voice anti-spoofing ---
     # HuggingFace/ModelScope model id. If set AND torch+transformers are
     # installed, the real detector is used; otherwise we fall back to the
